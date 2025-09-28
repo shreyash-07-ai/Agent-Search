@@ -13,9 +13,9 @@ class ResearchResponse(BaseModel):
     summary: str
     sources: list[str]  
     tools_used: list[str]
-    
 
-llm = ChatGroq(model="llama3-70b-8192", temperature=0)
+
+llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0)
 parser = PydanticOutputParser(pydantic_object=ResearchResponse)
 
 prompt = ChatPromptTemplate.from_messages(
@@ -24,9 +24,13 @@ prompt = ChatPromptTemplate.from_messages(
             "system",
             """
             You are a research assistant that will help generate a research paper.
-            Answer the user query and use necessary tools. 
-            Provide a detailed multi-paragraph summary (at least 150-200 words) if information is available. 
-             Wrap the output in this format and provide no other text\n{format_instructions}
+            Answer the user query using the available tools if needed.
+            
+            Your FINAL answer MUST be a single valid JSON object that strictly follows this schema:
+            {format_instructions}
+            
+            Do not include any explanations, markdown, code fences, or other text.
+            Only output the JSON object.
             """,
         ),
         ("placeholder", "{chat_history}"),
