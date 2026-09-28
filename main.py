@@ -103,22 +103,12 @@ def parse_response(result: dict, fallback_topic: str) -> ResearchResponse:
 def make_report(response: ResearchResponse) -> str:
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return (
-        "--- Agent-Search Research Report ---
-"
-        f"Timestamp: {timestamp}
-
-"
-        f"Topic: {response.topic}
-
-"
-        f"Summary:
-{response.summary}
-
-"
-        f"Sources: {', '.join(response.sources) or 'Not specified'}
-"
-        f"Tools Used: {', '.join(response.tools_used) or 'Not specified'}
-"
+        "--- Agent-Search Research Report ---\n"
+        f"Timestamp: {timestamp}\n\n"
+        f"Topic: {response.topic}\n\n"
+        f"Summary:\n{response.summary}\n\n"
+        f"Sources: {', '.join(response.sources) or 'Not specified'}\n"
+        f"Tools Used: {', '.join(response.tools_used) or 'Not specified'}\n"
     )
 
 
