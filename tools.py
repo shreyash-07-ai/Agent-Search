@@ -1,6 +1,6 @@
 from ddgs import DDGS
 import wikipedia
-from langchain.tools import Tool
+from langchain_core.tools import Tool
 
 
 def run_web_search(query: str) -> str:
